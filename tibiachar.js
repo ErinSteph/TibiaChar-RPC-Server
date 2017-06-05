@@ -1,8 +1,8 @@
 /*
 
-TibiaChar RPC Server 2.1
+TibiaChar RPC Server 2.1.1
 
-Provies Tibia character profile data via a JSON API.
+Provides Tibia character profile data via a JSON API.
 
 Hint: Hash the name with a seed, have users put it in their comment section,
 and you have a confirmed method of linking tibia profiles to other profiles?
@@ -20,10 +20,11 @@ Sha.js: $ npm install sha.js
 
 // Config:
   const port = 9980; // set the port for the RPC server to listen on. Default for TibiaChar is 9980.
-  const seed = 'ygfkdsgif87yt7o8fhkshksjhf7'; // CHANGE THIS. 10 - infinity random chars, more chars = more secure, but slower. Around 30 is good.
+  const seed = 'fjylhojjhnmmjkftjyjtyjyuiuyjthdg'; // CHANGE THIS. Ten to infinity random chars, more chars = more secure, but slower. Around 30 is good.
+  const allowed = "*"; // Whether the API is public or not. Not a secure method of keeping others out. "*" for public, "localhost" for private.
 
 
-//This is the code. Don't mess if you think you might break something.
+//This is the code.
 
 
 console.log('-----------------------------------------');
@@ -31,7 +32,7 @@ console.log('|  _____ _ _   _     _____ _            |');
 console.log('| |_   _|_| |_|_|___|     | |_ ___ ___  |'); 
 console.log('|   | | | | . | | .\'|   --|   | .\'|  _| |'); 
 console.log('|   |_| |_|___|_|__,|_____|_|_|__,|_|   |'); 
-console.log('------------------------------------v2.1-');
+console.log('----------------------------------v2.1.1-');
 
 
 function tibiachar(){
@@ -135,8 +136,7 @@ function sha(inp){
 }
 
 rpc.use(function(req, res, next){
-  res.header("Access-Control-Allow-Origin", "*");
-  //res.header("Content-Type", "application/json");
+  res.header("Access-Control-Allow-Origin", allowed);
   next();
 });
 
