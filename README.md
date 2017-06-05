@@ -2,7 +2,7 @@
 
 ![Image should be here :c](http://i.imgur.com/i59DWuV.png "TibiaChar")
 
-Provies Tibia character profile data via a JSON API. Keep it local or make it public, your call.
+Provides Tibia character profile data via a JSON API. Keep it local or make it public, your call.
 
 ## Installing the requirements
 * Express: $ npm install express --save
