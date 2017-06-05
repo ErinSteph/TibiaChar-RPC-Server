@@ -14,4 +14,4 @@ Provies Tibia character profile data via a JSON API. Keep it local or make it pu
 * Use: http://localhost:9980/Char+Name
 * Quit server: ctrl+c (on mac anyway, if it's not in a screen just close the window)
 
-http://tibiachar.ml/
+Visit the development site at http://tibiachar.ml/
