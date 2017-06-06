@@ -1,14 +1,15 @@
 /*
 
-TibiaChar RPC Server 2.1.1
+TibiaChar RPC Server 2.1.2
 
-Provides Tibia character profile data via a JSON API.
+Provides Tibia character profile data via a JSON API on localhost.
 
-Hint: Hash the name with a seed, have users put it in their comment section,
-and you have a confirmed method of linking tibia profiles to other profiles?
+Hint: Tell users to put the hash value of their character name into
+the comment section on their tibia character profile, and you have
+a way to confirm if they actually own the character!
 
 love, Erin Steph 2017
-(See me on refugia!)
+(See me on Refugia!)
 
 */
 
@@ -32,7 +33,14 @@ console.log('|  _____ _ _   _     _____ _            |');
 console.log('| |_   _|_| |_|_|___|     | |_ ___ ___  |'); 
 console.log('|   | | | | . | | .\'|   --|   | .\'|  _| |'); 
 console.log('|   |_| |_|___|_|__,|_____|_|_|__,|_|   |'); 
-console.log('----------------------------------v2.1.1-');
+console.log('|--------------------------------v2.1.2-|');
+console.log('|       - TibiaChar RPC Server -        |');
+console.log('|        A local API server for         |');
+console.log('|         tibia character data.         |'); 
+console.log('| * Query on http://localhost:' + port + '/     |'); 
+console.log('| * Type char name to view in console   |'); 
+console.log('| * Type quit to exit                   |'); 
+console.log('-----------------------------------------');
 
 
 function tibiachar(){
@@ -165,3 +173,22 @@ rpc.get('', function(req, res){
 rpc.listen(port, function(){
   console.log('> TibiaChar RPC Server listening on port ' + port + '.');
 });
+
+var stdin = process.openStdin();
+
+stdin.addListener("data", function(d) {
+    if(d.toString().trim() != 'quit'){
+      tib.get(d.toString().trim(), function(i){
+        i['hash'] = sha(i['name']);
+        console.log('> loaded data for ' + i['name'] + ':');
+        for(key in i){
+          if(key.indexOf('linked') < 1){ 
+            console.log("  " + key + ": " + i[key]);
+          }
+        }
+      });
+    }else{
+      console.log('>  quitting...');
+      process.exit();  
+    }
+  });
