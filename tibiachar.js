@@ -188,7 +188,7 @@ stdin.addListener("data", function(d) {
         }
       });
     }else{
-      console.log('>  quitting...');
+      console.log('> quitting...');
       process.exit();  
     }
   });
